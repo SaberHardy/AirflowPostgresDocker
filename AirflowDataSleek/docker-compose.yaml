@@ -2,6 +2,7 @@ services:
   sleek-airflow:
     image: sleek-airflow:latest
     volumes:
+      - ./tmp:/tmp
       - ./dags:/opt/airflow/dags
       - ./airflow:/opt/airflow
 
