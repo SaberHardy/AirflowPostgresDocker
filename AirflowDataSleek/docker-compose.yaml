@@ -1,11 +1,14 @@
-#version: "3"
 services:
   sleek-airflow:
     image: sleek-airflow:latest
     volumes:
+      - ./dags:/opt/airflow/dags
       - ./airflow:/opt/airflow
 
     ports:
       - "8080:8080"
-
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=10
+      - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
     command: airflow standalone
