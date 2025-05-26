@@ -1,4 +1,14 @@
 services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: test
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
   sleek-airflow:
     image: sleek-airflow:latest
     volumes:
@@ -13,3 +23,6 @@ services:
       - AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=10
       - AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
     command: airflow standalone
+
+volumes:
+  postgres-db-volume:
